@@ -51,7 +51,7 @@ class PostBase(BaseModel):
 
 
 class PostCreate(PostBase):
-    userid: int  # TEMP
+    user_id: int  # TEMP
 
 
 class PostResponse(PostBase):
