@@ -19,14 +19,21 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    pass
+    password: str = Field(
+        min_length=8, max_length=255
+    )  # Password for the user, required and limited to 255 characters
 
 
-class UserResponse(UserBase):
+class UserPublic(UserBase):
     model_config = ConfigDict(from_attributes=True)  # Allows parsing from ORM models
     id: int
+    username: str
     image_file: str | None
     image_path: str  # URL path to the user's profile image, included in responses
+
+
+class UserPrivate(UserPublic):
+    email: EmailStr  # Email address of the user, included in private responses
 
 
 class UserUpdate(BaseModel):
@@ -39,6 +46,13 @@ class UserUpdate(BaseModel):
     image_file: str | None = Field(
         default=None
     )  # Optional field for the user's profile image file, included in update requests
+
+
+class Token(BaseModel):
+    access_token: (
+        str  # The JWT access token string, included in authentication responses
+    )
+    token_type: str  # The type of the token (e.g., "bearer"), included in authentication responses
 
 
 class PostBase(BaseModel):
@@ -59,7 +73,7 @@ class PostResponse(PostBase):
     id: int  # Unique identifier for the post, included in responses
     user_id: int  # ID of the user who created the post, included in responses
     date_posted: datetime  # Date when the post was created, included in responses
-    author: UserResponse  # Nested user information for the author of the post, included in responses
+    author: UserPublic  # Nested user information for the author of the post, included in responses
 
 
 class PostUpdate(BaseModel):

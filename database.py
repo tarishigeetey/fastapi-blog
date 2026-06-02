@@ -18,7 +18,7 @@ class Base(DeclarativeBase):
     pass  # Base class for all ORM
 
 
-async def get_DB():
+async def get_db():
     async with (
         AsyncSessionLocal() as session
     ):  # Create a new database session using the session factory
