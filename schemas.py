@@ -43,9 +43,6 @@ class UserUpdate(BaseModel):
     email: EmailStr | None = Field(
         default=None, max_length=100
     )  # Email address of the user, validated as an email format
-    image_file: str | None = Field(
-        default=None
-    )  # Optional field for the user's profile image file, included in update requests
 
 
 class Token(BaseModel):
