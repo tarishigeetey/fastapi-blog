@@ -103,6 +103,22 @@ async def account_page(request: Request):
     return templates.TemplateResponse(request, "account.html", {"title": "Account"})
 
 
+@app.get("/forgot-password", include_in_schema=False)
+async def forgot_password_page(request: Request):
+    return templates.TemplateResponse(
+        request, "forgot_password.html", {"title": "Forgot Password"}
+    )
+
+
+@app.get("/reset-password", include_in_schema=False)
+async def reset_password_page(request: Request):
+    response = templates.TemplateResponse(
+        request, "reset_password.html", {"title": "Reset Password"}
+    )
+    response.headers["Referrer-Policy"] = "no-store"
+    return response
+
+
 @app.get("/users/{user_id}/posts", include_in_schema=False, name="user_posts")
 async def user_posts_page(
     request: Request,

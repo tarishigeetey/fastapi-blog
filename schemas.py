@@ -88,3 +88,25 @@ class PaginatedPostsResponse(BaseModel):
         PostResponse
     ]  # List of posts for the current page, included in paginated responses
     has_more: bool  # Indicates if there are more posts available beyond the current page, included in paginated responses
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr = Field(
+        max_length=120
+    )  # Email address of the user requesting password reset, validated as an email format
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(
+        min_length=8
+    )  # New password for the user, required and limited to 255 characters
+
+
+class ChangePasswordRequest(BaseModel):
+    current_password: (
+        str  # Current password of the user, required and limited to 255 characters
+    )
+    new_password: str = Field(
+        min_length=8
+    )  # New password for the user, required and limited to 255 characters
