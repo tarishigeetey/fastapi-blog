@@ -78,3 +78,13 @@ class PostUpdate(BaseModel):
         default=None, min_length=1, max_length=100
     )  # Title of the post, required and limited to 100 characters
     content: str | None = Field(default=None, min_length=1)
+
+
+class PaginatedPostsResponse(BaseModel):
+    total: int  # Total number of posts available, included in paginated responses
+    skip: int  # Number of posts to skip, included in paginated responses
+    limit: int  # Number of posts per page, included in paginated responses
+    posts: list[
+        PostResponse
+    ]  # List of posts for the current page, included in paginated responses
+    has_more: bool  # Indicates if there are more posts available beyond the current page, included in paginated responses

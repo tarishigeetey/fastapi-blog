@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30
     max_upload_size_bytes: int = 5 * 1024 * 1024  # 5 MB
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    posts_per_page: int = 10  # Number of posts to display per page in paginated responses
 
 
 settings = Settings()  # type: ignore[call-arg] #Loaded settings from .env file
