@@ -11,6 +11,8 @@ from config import settings
 from database import get_db
 from schemas import PaginatedPostsResponse, PostCreate, PostResponse, PostUpdate
 
+from botocore.exceptions import ClientError
+
 router = APIRouter()
 
 
